@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
 function App() {
+
+  const [pos, setPos] = useState([0,0])
+
+  const logMousePosition = e => {
+      console.log(e.clientX, e.clientY)
+      let arrPos = []
+      arrPos[0] = e.clientX
+      arrPos[1] = e.clientY
+      setPos(arrPos)
+    }
+
+  useEffect(() => {
+    console.log("Event on");
+    window.addEventListener("mousemove", logMousePosition)
+
+    return () => {
+      console.log("Nettoyage");
+
+      window.removeEventListener("mousemove", logMousePosition)
+    }
+    
+
+  },[])
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Hello World
     </div>
   );
 }
